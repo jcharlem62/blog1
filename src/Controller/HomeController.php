@@ -28,7 +28,7 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/show/{article}", name="show")
+     * @Route("/show/{id}", name="show")
      */
     public function show(Article $article=null): Response
     {
@@ -36,7 +36,7 @@ class HomeController extends AbstractController
         if (!$article) {
             return $this->redirectToRoute('home');
         }
-        return $this->render('show/index.html.twig', [
+        return $this->render('home/show.html.twig', [
             "article" => $article
         ]);
     }
