@@ -1,31 +1,54 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}Liste des articles
 {% endblock %}
-
 {% block body %}
-    <div class="container">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
         <div class="row">
-            <h1 class="text-center">Liste des articles</h1>
+          <h1 class="text-center mt-5">{{titre}}</h1>
         </div>
         <div class="row">
-            {% for article in articles %}
-                <div class="card col-md-3 m-4">
-                    <img src="{{asset('images/blog/'~article.image)}}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <p class="date">Ecrit le
-                            {{article.createdAt | date("d/m/Y")}}
-                            à
-                            {{article.createdAt | date("H:i")}}
-                            par <br/>
-                            {{article.author}}
-                            <br/>
-                        </p>
-                        <h5 class="card-title">{{article.title}}</h5>
-                        <a href="{{path('show', {id : article.id})}}" class="btn btn-primary">Lire >></a>
-                    </div>
-                </div>
+          {% for article in articles %}
+            <div class="card col-md-3 m-4">
+              <img src="{{asset('images/blog/'~article.image)}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <p class="date">Ecrit le
+                  {{article.createdAt | date("d/m/Y")}}
+                  à
+                  {{article.createdAt | date("H:i")}}
+                  <br/>
+                  Par
+                  {{article.author}}
+                </p>
+                <h5 class="card-title">{{article.title}}</h5>
+                <a href="{{path('show', {id : article.id})}}" class="btn btn-primary">Lire >></a>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+      </div>
+      <aside class="col-md-3">
+        <div class="row">
+          <h2 class="h1 mb-4 mt-5">Categories</h2>
+        </div>
+        <div class="row">
+          <ul class="list-group">
+            {% for category in categories %}
+              <li class="list-group-item">
+                <a href="{{path('show_articles', {id : category.id})}}">
+                  {{category.title}}
+                  <span class="badge badge-danger">
+                    {{category.articles | length}}
+                  </span>
+                </a>
+              </li>
             {% endfor %}
+          </ul>
         </div>
+      </aside>
     </div>
+  </div>
+
 {% endblock %}

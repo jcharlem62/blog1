@@ -40,7 +40,7 @@ class Article
     private $createdAt;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Category::class)
+     * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="articles")
      */
     private $category;
 
@@ -112,12 +112,12 @@ class Article
     /**
      * @return Collection<int, Category>
      */
-    public function getcategory(): Collection
+    public function getCategory(): Collection
     {
         return $this->category;
     }
 
-    public function addcategory(Category $category): self
+    public function addCategory(Category $category): self
     {
         if (!$this->category->contains($category)) {
             $this->category[] = $category;
@@ -126,7 +126,7 @@ class Article
         return $this;
     }
 
-    public function removecategory(Category $category): self
+    public function removeCategory(Category $category): self
     {
         $this->category->removeElement($category);
 
