@@ -8,8 +8,8 @@
 {% block body %}
   <div class="container">
     <h1 class="title p-1">{{article.title}}</h1>
-    <div class="img-fluid">
-      <img width="100%" src="{{asset('images/unknown.png')}}" alt="{{article.title}}"/>
+    <div class="img-fluid text-center">
+      <img class="w-50" src="{{asset('images/blog/'~article.image)}}" alt="{{article.title}}"/>
     </div>
     <div class="content text-justify">
       <p class="date">Ecrit le
@@ -20,7 +20,7 @@
         {{article.author}}
       </p>
       <h5 class="title">{{article.title}}</h5>
-      <p class="content">{{article.content}}</p>
+      <p class="content">{{article.content|raw}}</p>
     </div>
   </div>
 {% endblock %}
