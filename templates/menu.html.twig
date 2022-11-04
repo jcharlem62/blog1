@@ -9,9 +9,20 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{path('home')}}">Accueil</a>
                 </li>
-                <li class="nav-item">
-    <a href="{{ path('security_register')}}" class=" nav-link btn btn-success  text-white"> Inscription</a>
-</li>
+
+
+                 {% if app.user %}
+                <li>
+                    <a href="{{ path('security_logout')}}" class="btn btn-danger ms-3">Déconnexion</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{{ path('security_register')}}" class="btn btn-success">Inscription</a>
+                </li>
+                <li>
+                    <a href="{{ path('security_login')}}" class="btn btn-info ms-3">Connexion</a>
+                </li>
+                {% endif %}
 
                 
             </ul>
