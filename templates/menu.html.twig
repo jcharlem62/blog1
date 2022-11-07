@@ -1,39 +1,38 @@
 <nav class="navbar navbar-expand-lg bg-light">
-    <div class="container">
-        <a class="navbar-brand" href="{{path('home')}}">Blog AFPA</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{path('home')}}">Accueil</a>
-                </li>
-                {% if is_granted('ROLE_SUPER_ADMIN') %}
-                    <li class="nav-item">
-                    <a href="{{ path('admin')}}" class="nav-link btn btn-info text-white ms-3">Back-office</a>
-                    </li>
-                {% endif %}
+  <div class="container">
+    <a class="navbar-brand" href="{{ path('home') }}">Blog AFPA</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{ path('home') }}">Accueil</a>
+        </li>
+        {% if is_granted('ROLE_SUPER_ADMIN') %}
+          <li class="nav-item">
+            <a href="{{ path('admin') }}" class="nav-link btn btn-info text-white ms-3">Back-office</a>
+          </li>
+        {% endif %}
 
-                 {% if app.user %}
-                <li>
-                    <a href="{{ path('security_logout')}}" class="btn btn-danger ms-3">Déconnexion</a>
-                </li>
-                {% else %}
-                <li>
-                    <a href="{{ path('security_register', {user_type : "user"})}}" class="btn btn-success">Inscription</a>
-                </li>
-                <li>
-                    <a href="{{ path('security_login')}}" class="btn btn-info ms-3">Connexion</a>
-                </li>
-                {% endif %}
-
-                
-            </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+        {% if app.user %}
+          <li>
+            <a href="{{ path('security_logout') }}" class="btn btn-danger ms-3">Déconnexion</a>
+          </li>
+        {% else %}
+          <li>
+            <a href="{{ path('security_register', { user_type: 'user' }) }}" class="btn btn-success">Inscription</a>
+          </li>
+          <li>
+            <a href="{{ path('security_login') }}" class="btn btn-info ms-3">Connexion</a>
+          </li>
+        {% endif %}
+      </ul>
+      <form class="form-inline" role="search" method="post" action="{{ path('recherche') }}">
+        <div class="form-group">
+          <input type="text" class="form-control mr-2" name="title" placeholder="Recherche..." />
+          <input type="date" class="form-control mr-2" name="date" placeholder="Choisir une date" />
         </div>
+        <button type="submit" class="btn btn-primary mr-4">Chercher</button>
+      </form>
     </div>
+  </div>
 </nav>
